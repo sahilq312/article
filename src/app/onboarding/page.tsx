@@ -7,7 +7,7 @@ import { useCategoryStore } from "@/store/category-store";
 import { redirect } from "next/navigation";
 
 export default function CuisineSelector() {
-  const { options, selectedOptions, setSelectedOptions } = useCategoryStore();
+  const { options, selectedOptions, setSelectedOptions, setOnboarding } = useCategoryStore();
 
   const toggleTopic = (topic: string) => {
     setSelectedOptions(
@@ -17,6 +17,10 @@ export default function CuisineSelector() {
     );
   };
 
+  const completeOnBoarding = () => {
+    setOnboarding(true);
+    redirect("/article");
+  }
   return (
     <div className="min-h-screen bg-black p-6 pt-40">
       <h1 className="text-white text-3xl font-semibold mb-12 text-center">
@@ -116,7 +120,7 @@ export default function CuisineSelector() {
         <div className="flex justify-center items-center h-14">
           <Button
             className="mt-4 hover:bg-none text-base bg-[#1f1209] font-medium px-4 py-2 border border-[#ff9066] text-[#ff9066]"
-            onClick={() => redirect("/article")}
+            onClick={completeOnBoarding}
           >
             Submit
           </Button>

@@ -3,11 +3,24 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { useCategoryStore } from "@/store/category-store";
+import { useEffect, useState } from "react";
 
-export default function ChangePrefernce() {
+export default function ChangePreference() {
   const { options, selectedOptions, setSelectedOptions } = useCategoryStore();
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Ensure store is hydrated
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleTopic = (topic: string) => {
+    if (isLoading) return; // Prevent interactions while loading
+    
     setSelectedOptions(
       selectedOptions.includes(topic)
         ? selectedOptions.filter((c) => c !== topic)
@@ -15,10 +28,21 @@ export default function ChangePrefernce() {
     );
   };
 
+  // Show loading state or fallback
+  if (isLoading || !options?.length) {
+    return (
+      <div className="w-full p-6 pt-40">
+        <h1 className="text-white text-3xl font-semibold mb-12 text-center">
+          Loading preferences...
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full p-6 pt-40">
       <h1 className="text-white text-3xl font-semibold mb-12 text-center">
-        Change your prefernce?
+        Change your preferences
       </h1>
       <div className="max-w-[500px] mx-auto">
         <motion.div
@@ -32,7 +56,7 @@ export default function ChangePrefernce() {
           }}
         >
           {options.map((topic) => {
-            const isSelected = selectedOptions.includes(topic);
+            const isSelected = selectedOptions?.includes(topic);
             return (
               <motion.button
                 key={topic}
@@ -70,6 +94,7 @@ export default function ChangePrefernce() {
                       : "text-zinc-400 ring-[hsla(0,0%,100%,0.06)]"
                   }
                 `}
+                disabled={isLoading}
               >
                 <motion.div
                   className="relative flex items-center"
@@ -111,7 +136,6 @@ export default function ChangePrefernce() {
             );
           })}
         </motion.div>
-
       </div>
     </div>
   );
