@@ -63,12 +63,10 @@ export async function GET() {
 
     const results = await Promise.allSettled(topics.map(fetchArticles));
 
-    // Normalize results
     const formattedResults: TopicResult[] = results.map((result) =>
       result.status === "fulfilled" ? result.value : { topic: "", error: "Unknown error" }
     );
 
-    // Flatten articles
     const flattenedArticles = flattenArticles(formattedResults);
 
     if(flattenedArticles.length === 0) {

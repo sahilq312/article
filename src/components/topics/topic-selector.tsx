@@ -4,19 +4,13 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Check } from "lucide-react"
+import { useCategoryStore } from "@/store/category-store"
 
-const topics = [
-  "News",
-  "Sports",
-  "Technology",
-  "Business",
-  "Entertainment",
-  "Health"
-];
 
 export function TopicSelector({ selectedTopic: initialSelectedTopic }: { selectedTopic?: string }) {
   const [selected, setSelected] = useState<string[]>(initialSelectedTopic ? [initialSelectedTopic] : [])
   const router = useRouter()
+  const { selectedOptions } = useCategoryStore();
 
   const toggleTopic = (topic: string) => {
     let updatedTopics: string[]
@@ -50,7 +44,7 @@ export function TopicSelector({ selectedTopic: initialSelectedTopic }: { selecte
           mass: 0.5,
         }}
       >
-        {topics
+        {selectedOptions
           .filter((topic) => topic !== "all")
           .map((topic) => {
             const isSelected = selected.includes(topic)

@@ -2,11 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useCategoryStore } from "@/store/category-store";
-import { redirect } from "next/navigation";
 
-export default function CuisineSelector() {
+export default function ChangePrefernce() {
   const { options, selectedOptions, setSelectedOptions } = useCategoryStore();
 
   const toggleTopic = (topic: string) => {
@@ -18,9 +16,9 @@ export default function CuisineSelector() {
   };
 
   return (
-    <div className="min-h-screen bg-black p-6 pt-40">
+    <div className="w-full p-6 pt-40">
       <h1 className="text-white text-3xl font-semibold mb-12 text-center">
-        What are your favorite topics?
+        Change your prefernce?
       </h1>
       <div className="max-w-[500px] mx-auto">
         <motion.div
@@ -113,14 +111,7 @@ export default function CuisineSelector() {
             );
           })}
         </motion.div>
-        <div className="flex justify-center items-center h-14">
-          <Button
-            className="mt-4 hover:bg-none text-base bg-[#1f1209] font-medium px-4 py-2 border border-[#ff9066] text-[#ff9066]"
-            onClick={() => redirect("/article")}
-          >
-            Submit
-          </Button>
-        </div>
+
       </div>
     </div>
   );
