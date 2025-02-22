@@ -6,8 +6,12 @@ import { Button } from "@/components/ui/button";
 import { useCategoryStore } from "@/store/category-store";
 import { redirect } from "next/navigation";
 
-export default function CuisineSelector() {
-  const { options, selectedOptions, setSelectedOptions, setOnboarding } = useCategoryStore();
+export default function OnboardingPage() {
+  const { options, selectedOptions, setSelectedOptions, setOnboarding, onboarding } = useCategoryStore();
+
+  if (onboarding) {
+    redirect("/article");
+  }
 
   const toggleTopic = (topic: string) => {
     setSelectedOptions(

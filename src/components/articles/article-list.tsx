@@ -20,7 +20,8 @@ const ArticleList = ({ articles }: { articles: ArticleListProp }) => {
       <ScrollArea className="h-full">
         <div className="flex flex-col items-center justify-center gap-4 p-4 divide-y">
           {articles.map((article) => (
-            <div
+            <Link 
+              href={`/article/${article.id}`}
               className="w-full flex justify-around items-center p-2 h-24 gap-2 "
               key={article.id}
             >
@@ -53,7 +54,7 @@ const ArticleList = ({ articles }: { articles: ArticleListProp }) => {
                     : "No date available"}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </ScrollArea>

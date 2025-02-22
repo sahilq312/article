@@ -20,7 +20,7 @@ const HeroSection = () => {
               href="#"
               className="inline-flex items-center rounded-full bg-muted px-4 py-1.5 text-sm font-medium"
             >
-              🎉 <Separator className="mx-2 h-4" orientation="vertical" /> Introducing Quinx
+              🎉 <Separator className="mx-2 h-4" orientation="vertical" /> Introducing NewsScope.ai 
             </motion.a>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -28,9 +28,9 @@ const HeroSection = () => {
               transition={{ delay: 0.4 }}
               className="text-4xl font-bold leading-tight tracking-tighter md:text-6xl lg:text-7xl lg:leading-[1.1]"
             >
-              Build Discord Bots
+              Discover News
               <br />
-              Without Code
+              Stay Updated With AI
             </motion.h1>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -38,7 +38,7 @@ const HeroSection = () => {
               transition={{ delay: 0.5 }}
               className="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl"
             >
-              Create, deploy, and scale Discord bots without writing a single line of code.
+              AI-powered news app fetching and summarizing latest articles from the web.
             </motion.span>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ const HeroSection = () => {
               >
                   <Link href={"/onboarding"}>
               <button className="bg-foreground text-background px-6 py-3 rounded-lg font-medium text-lg from-accent-foreground to-accent-background bg-gradient-to-r">
-                Start Building
+                Start Reading
               </button>
                   </Link>
             </motion.div>
