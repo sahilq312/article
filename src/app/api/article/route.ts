@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 import { db } from "@/db/drizzle";
 import { articles } from "@/db/schema";
+import { asc, sql } from "drizzle-orm";
 
 const topics: string[] = ["News", "Sports", "Technology", "Business", "Entertainment", "Health"];
 
@@ -36,8 +37,31 @@ function flattenArticles(data: TopicResult[]): FlattenedArticle[] {
   );
 }
 
+async function cleanupOldArticles() {
+  try {
+    // Get IDs of the oldest articles beyond the first 50
+    const oldArticleIds = await db
+      .select({ id: articles.id })
+      .from(articles)
+      .orderBy(asc(articles.createdAt))
+      .offset(100)
+      .limit(100);
+
+    if (oldArticleIds.length > 0) {
+      await db
+        .delete(articles)
+        .where(sql`${articles.id} IN (${oldArticleIds.map(a => a.id).join(',')})`);
+    }
+  } catch (error) {
+    console.error("Cleanup failed:", error);
+  }
+}
+
 export async function GET() {
   try {
+    // First, cleanup old articles
+    await cleanupOldArticles();
+
     const apiKey = process.env.SERPER_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "Missing API key." }, { status: 500 });
@@ -75,7 +99,6 @@ export async function GET() {
     if (flattenedArticles.length > 0) {
       await db.insert(articles).values(flattenedArticles).onConflictDoNothing();
     }
-
 
     return NextResponse.json(flattenedArticles);
   } catch (error) {

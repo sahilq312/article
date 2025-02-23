@@ -9,7 +9,7 @@ export const fetchCategory = async (category: string) => {
         /* if (!category) {
             const list = await db.select()
                 .from(articles)
-                .orderBy(desc(articles.createdAt))
+                .orderBy(desc(articles.id))  // Order by ID descending
                 .limit(10);
             return { success: list };
         } */
@@ -17,11 +17,10 @@ export const fetchCategory = async (category: string) => {
         const list = await db.select()
             .from(articles)
             .where(eq(articles.category, category))
-            .orderBy(desc(articles.createdAt))
+            .orderBy(desc(articles.id))  // Order by ID descending
             .limit(10);
         return { success: list };
     } catch (error) {
         return {error: error}
     }
 }
-/* class : component__advertiserPhone */
