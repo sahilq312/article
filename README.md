@@ -4,9 +4,9 @@
 
 
 
-[+] scrape for summarise  firecrawl.dev
-[+] server actions should be authenticated with clerk 
-[+] responsive design
-[-] api for saving  onboarding preference 
-[-] multi selected category 
-[-] by default all categories selected
+- [+] scrape for summarise  firecrawl.dev 
+- [+] server actions should be authenticated with clerk 
+- [+] responsive design
+- [+] multi selected category 
+- [+] by default all categories selected
+- [-] api for saving  onboarding preference 

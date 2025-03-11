@@ -13,14 +13,11 @@ export default function CategoryProvider({
   const pathname = usePathname();
   const router = useRouter();
 
-  
-
   useEffect(() => {
     if (!onboarding && pathname !== "/onboarding") {
       router.push("/onboarding");
     }
-  }, [onboarding, pathname, router, ]);
-
+  }, [onboarding, pathname, router]);
 
   return <>{children}</>;
 }
