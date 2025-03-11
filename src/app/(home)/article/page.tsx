@@ -9,19 +9,15 @@ export default async function ArticlesPage(props: {
   const searchParams = await props.searchParams;
   const topicParam = searchParams.topic;
   
-  // Parse topics from URL parameter
   let selectedTopics: string[] = [];
   if (typeof topicParam === "string") {
     selectedTopics = topicParam.split(',');
   } else if (Array.isArray(topicParam)) {
-    // Handle case where Next.js parses the parameter as an array
     selectedTopics = topicParam;
   }
 
-  // Convert back to a single string for the existing API
   const topicQueryString = selectedTopics.join(',');
   
-  // Pass the first topic for backward compatibility or empty string if none selected
   const articles = await fetchCategory(topicQueryString || "");
 
   if (!articles.success || articles.success.length === 0) {

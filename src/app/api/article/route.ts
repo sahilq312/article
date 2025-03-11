@@ -39,7 +39,6 @@ function flattenArticles(data: TopicResult[]): FlattenedArticle[] {
 
 async function cleanupOldArticles() {
   try {
-    // Get IDs of the oldest articles beyond the first 50
     const oldArticleIds = await db
       .select({ id: articles.id })
       .from(articles)
@@ -59,7 +58,6 @@ async function cleanupOldArticles() {
 
 export async function GET() {
   try {
-    // First, cleanup old articles
     await cleanupOldArticles();
 
     const apiKey = process.env.SERPER_API_KEY;

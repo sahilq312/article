@@ -28,7 +28,6 @@ export default function ChangePreference() {
     );
   };
 
-  // Show loading state or fallback
   if (isLoading || !options?.length) {
     return (
       <div className="w-full p-6 pt-40">
