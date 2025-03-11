@@ -2,7 +2,7 @@
 
 import type * as React from "react"
 import { motion } from "framer-motion"
-import { Home, Settings, Bell, User } from "lucide-react"
+import { Home, Settings, User } from "lucide-react"
 import { useTheme } from "next-themes"
 
 interface MenuItem {
