@@ -21,9 +21,9 @@ export default async function ArticlesPage(props: {
     );
   }
   return (
-    <div className="flex border border-dashed min-h-[85vh] ">
-      <div className="p-6 border border-dashed w-1/4 min-h-[85vh] pt-10">
-        <h1 className=" text-3xl font-semibold mb-8 text-center">
+    <div className="flex flex-col md:flex sm:flex-row border border-dashed min-h-[85vh] ">
+      <div className="pt-5 lg:p-6 border border-dashed w-full lg:w-1/4 h-[8vh] lg:min-h-[85vh] lg:pt-10">
+        <h1 className=" text-3xl font-semibold mb-8 text-center hidden lg:block">
           What&apos;s on your mind?
         </h1>
         <TopicSelector selectedTopic={selectedTopic} />

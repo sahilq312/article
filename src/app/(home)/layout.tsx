@@ -9,9 +9,9 @@ export default function HomeLayout({
   }) {
  
   return (
-      <div className="min-h-screen bg-background flex flex-col items-center p-4">
+      <div className="min-h-screen bg-background flex flex-col items-center sm:p-0 lg:p-2">
         <MenuBar />
-        <div className=" w-full max-w-7xl rounded-md p-4 h-full">
+        <div className=" w-full lg:max-w-7xl rounded-md p-0 lg:p-2 h-full">
           {children}
         </div>
       </div>

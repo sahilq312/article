@@ -35,7 +35,7 @@ export default async function ArticlePreview({
   }
 
   return (
-    <div className="flex flex-col p-6 min-h-[85vh] border border-dashed">
+    <div className="flex flex-col p-3 md:p-6 min-h-[85vh] border border-dashed">
       <ArticleDetail data={data} />
       <ArticleAIComponent article={data.link} />
     </div>
