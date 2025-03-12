@@ -64,7 +64,6 @@ export async function updateCategories(selectedCategories: string[]) {
   }
 
   try {
-    // Validate categories
     const validCategories = selectedCategories.filter((category) =>
       AVAILABLE_CATEGORIES.includes(category)
     );
