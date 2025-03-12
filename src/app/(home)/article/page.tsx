@@ -1,4 +1,5 @@
 import { fetchCategory } from "@/app/actions/category/fetch-category";
+import { checkOnboardingStatus } from "@/app/actions/category/user-category";
 import ArticleList from "@/components/articles/article-list";
 import { TopicSelector } from "@/components/topics/topic-selector";
 import React from "react";
@@ -8,6 +9,7 @@ export default async function ArticlesPage(props: {
 }) {
   const searchParams = await props.searchParams;
   const topicParam = searchParams.topic;
+  const { selectedCategories } = await checkOnboardingStatus();
   
   let selectedTopics: string[] = [];
   if (typeof topicParam === "string") {
@@ -24,7 +26,7 @@ export default async function ArticlesPage(props: {
     return (
       <div className="border border-dashed min-h-[85vh] flex flex-col items-center justify-center gap-10">
         <h1 className="text-2xl font-medium">Select a Category</h1>{" "}
-        <TopicSelector selectedTopic={topicQueryString} />
+        <TopicSelector selectedTopic={topicQueryString} userTopic={selectedCategories} />
       </div>
     );
   }
@@ -35,7 +37,7 @@ export default async function ArticlesPage(props: {
         <h1 className="text-3xl font-semibold mb-8 text-center hidden lg:block">
           What&apos;s on your mind?
         </h1>
-        <TopicSelector selectedTopic={topicQueryString} />
+        <TopicSelector selectedTopic={topicQueryString} userTopic={selectedCategories}/>
       </div>
       <ArticleList articles={articles.success} />
     </div>

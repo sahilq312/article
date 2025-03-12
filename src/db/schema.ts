@@ -21,6 +21,6 @@ export const users = pgTable("users", {
   email: text("email").unique().notNull(),
   name: text("name").notNull(),
   onboarding: boolean("onboarding").notNull().default(false),
-  //clerkId: text("clerk_id").notNull(),
+  clerkId: text("clerk_id").notNull(),
   selectedCategories: text("selected_categories").array().notNull(),
 });

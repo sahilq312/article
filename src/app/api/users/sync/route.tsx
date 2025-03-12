@@ -29,6 +29,8 @@ export async function POST() {
         email: email,
         name: name,
         selectedCategories: [], 
+        clerkId: user.id,
+        onboarding: false
       });
       
       return NextResponse.json({ success: true, action: 'created' });

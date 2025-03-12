@@ -5,11 +5,11 @@ import { Check } from "lucide-react";
 import { useCategoryStore } from "@/store/category-store";
 import { useEffect, useState } from "react";
 
-export default function ChangePreference() {
+export default function ChangePreference({userTopic}: {userTopic?: string[]}) {
   const { options, selectedOptions, setSelectedOptions } = useCategoryStore();
   const [isLoading, setIsLoading] = useState(true);
+  console.log(userTopic);
   
-  // Ensure store is hydrated
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -19,7 +19,7 @@ export default function ChangePreference() {
   }, []);
 
   const toggleTopic = (topic: string) => {
-    if (isLoading) return; // Prevent interactions while loading
+    if (isLoading) return; 
     
     setSelectedOptions(
       selectedOptions.includes(topic)

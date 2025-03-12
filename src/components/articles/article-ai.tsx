@@ -13,7 +13,6 @@ export const ArticleAIComponent = ({ article }: { article: string }) => {
     const summarizeArticle = async () => {
       try {
         const response = await axios.post("/api/ai-summary", { url: article });
-        console.log(response.data.success);
         setSummary({ summary: response.data.success });
       } catch (error) {
         console.error("Error fetching AI summary:", error);

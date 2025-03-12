@@ -4,26 +4,26 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
-import { useCategoryStore } from "@/store/category-store";
 
 export function TopicSelector({
   selectedTopic: initialSelectedTopic,
+  userTopic = [],
 }: {
   selectedTopic?: string;
+  userTopic?: string[];
 }) {
   const [selected, setSelected] = useState<string[]>([]);
   const router = useRouter();
-  const { selectedOptions } = useCategoryStore();
 
   useEffect(() => {
     if (initialSelectedTopic) {
       const initialTopics = initialSelectedTopic.split(",");
       setSelected(initialTopics);
-    } else if (selectedOptions.length > 0) {
-      setSelected(selectedOptions);
-      updateURL(selectedOptions);
+    } else if (userTopic?.length > 0) {
+      setSelected(userTopic);
+      updateURL(userTopic);
     }
-  }, [initialSelectedTopic, selectedOptions]);
+  }, [initialSelectedTopic, userTopic]); // Updated dependency array
 
   const updateURL = (topics: string[]) => {
     const searchParams = new URLSearchParams();
@@ -61,7 +61,7 @@ export function TopicSelector({
             mass: 0.5,
           }}
         >
-          {selectedOptions.map((topic) => {
+          {userTopic?.map((topic) => {
             const isSelected = selected.includes(topic);
             return (
               <motion.button
@@ -91,15 +91,13 @@ export function TopicSelector({
                   mass: 0.5,
                   backgroundColor: { duration: 0.1 },
                 }}
-                className={`
-                  inline-flex items-center px-4 py-2 rounded-full text-base font-medium
+                className={`inline-flex items-center px-4 py-2 rounded-full text-base font-medium
                   whitespace-nowrap overflow-hidden ring-1 ring-inset
                   ${
                     isSelected
                       ? "text-[#ff9066] ring-[hsla(0,0%,100%,0.12)]"
                       : "text-zinc-400 ring-[hsla(0,0%,100%,0.06)]"
-                  }
-                `}
+                  }`}
               >
                 <motion.div
                   className="relative flex items-center"

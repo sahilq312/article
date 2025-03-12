@@ -16,7 +16,6 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
               'Content-Type': 'application/json',
             },
           });
-          console.log('User synced successfully');
         } catch (error) {
           console.error('Failed to sync user:', error);
         }
