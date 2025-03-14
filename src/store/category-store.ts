@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Categories } from "@/utils/options";
 import { persist } from "zustand/middleware";
 
 interface CategoryState {
@@ -12,7 +13,7 @@ interface CategoryState {
 export const useCategoryStore = create(
   persist<CategoryState>(
     (set) => ({
-      options: ["News", "Sports", "Technology", "Business", "Entertainment", "Health"], 
+      options: Categories, 
       selectedOptions: [],
       onboarding: false,
       setSelectedOptions: (categories) => set({ selectedOptions: categories }),

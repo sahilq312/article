@@ -1,20 +1,18 @@
-import { auth } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation';
-import React from 'react'
-import OnboardingPage from './onboarding-component';
-import AuthWrapper from '@/components/auth/AuthWrapper';
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import OnboardingPage from "./onboarding-component";
+import { checkOnboardingStatus } from "../actions/category/user-category";
 
-const page = async() => {
+const page = async () => {
   const { userId } = await auth();
+  if (!userId) {
+    redirect("/sign-in");
+  }
+  const { onboarded } = await checkOnboardingStatus();
+  if (onboarded) {
+    redirect("/article")
+  }
+  return <OnboardingPage />;
+};
 
-    if (!userId) {
-        redirect("/sign-in")
-    }
-  return (
-      <AuthWrapper>
-          <OnboardingPage/>
-    </AuthWrapper>
-  )
-}
-
-export default page
+export default page;

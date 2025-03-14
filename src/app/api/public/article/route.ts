@@ -2,9 +2,7 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 import { db } from "@/db/drizzle";
 import { articles } from "@/db/schema";
-import { asc, sql } from "drizzle-orm";
-
-const topics: string[] = ["News", "Sports", "Technology", "Business", "Entertainment", "Health"];
+import { Categories as topics } from "@/utils/options";
 
 interface Article {
   title: string;
@@ -37,29 +35,8 @@ function flattenArticles(data: TopicResult[]): FlattenedArticle[] {
   );
 }
 
-async function cleanupOldArticles() {
-  try {
-    const oldArticleIds = await db
-      .select({ id: articles.id })
-      .from(articles)
-      .orderBy(asc(articles.createdAt))
-      .offset(100)
-      .limit(100);
-
-    if (oldArticleIds.length > 0) {
-      await db
-        .delete(articles)
-        .where(sql`${articles.id} IN (${oldArticleIds.map(a => a.id).join(',')})`);
-    }
-  } catch (error) {
-    console.error("Cleanup failed:", error);
-  }
-}
-
 export async function GET() {
   try {
-    await cleanupOldArticles();
-
     const apiKey = process.env.SERPER_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "Missing API key." }, { status: 500 });

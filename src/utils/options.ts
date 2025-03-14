@@ -1,0 +1,1 @@
+export const Categories = ["News", "Sports", "Technology", "Business", "Entertainment", "Health"];

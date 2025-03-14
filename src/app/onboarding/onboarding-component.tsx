@@ -6,8 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { addCategories, checkOnboardingStatus } from '@/app/actions/category/user-category';
-
-const CATEGORIES = ["News", "Sports", "Technology", "Business", "Entertainment", "Health"];
+import { Categories as CATEGORIES } from '@/utils/options';
 
 export default function OnboardingPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -20,7 +19,8 @@ export default function OnboardingPage() {
     async function checkStatus() {
       const {error, onboarded} = await checkOnboardingStatus();
       if (error) {
-        setError(error);
+        console.log(error);
+        // setError(error);
       } else if (onboarded) {
         router.push('/article');
       }
@@ -49,8 +49,8 @@ export default function OnboardingPage() {
     
     const result = await addCategories(selectedCategories);
     
-    if ('error' in result) {
-      setError("error");
+    if (result.error) {
+      setError(error);
     } else {
       router.push('/article');
     }
